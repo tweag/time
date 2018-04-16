@@ -525,7 +525,7 @@ mkPico :: Integer -> Integer -> Pico
 mkPico i f = fromInteger i + fromRational (f % 1000000000000)
 
 instance ParseTime LocalTime where
-    buildTime l xs = LocalTime <$> (buildTime l xs) <*> (buildTime l xs)
+    buildTime l xs = (\a b -> LocalTime a b) <$> (buildTime l xs) <*> (buildTime l xs)
 
 enumDiff :: (Enum a) => a -> a -> Int
 enumDiff a b = (fromEnum a) - (fromEnum b)
