@@ -588,7 +588,7 @@ instance ParseTime ZonedTime where
                 s' = s + fromRational (toRational ps)
             return $ utcToZonedTime z (posixSecondsToUTCTime s')
         f t _ = Just t
-        in mfoldl f (ZonedTime <$> (buildTime l xs) <*> (buildTime l xs)) xs
+        in mfoldl f ((\a b -> ZonedTime a b) <$> (buildTime l xs) <*> (buildTime l xs)) xs
 
 instance ParseTime UTCTime where
     buildTime l xs = zonedTimeToUTC <$> buildTime l xs
